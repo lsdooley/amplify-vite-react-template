@@ -12,13 +12,13 @@ function App() {
       next: (data) => setTodos([...data.items]),
     });
   }, []);
-
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
   
   function createTodo() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
+  }
+  
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
   }
 
   return (
@@ -27,8 +27,9 @@ function App() {
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map(todo => <li
-          onClick={() => deleteTodo(todo.id)}          
-          key={todo.id}>{todo.content}
+          onClick={() => deleteTodo(todo.id)}
+          key={todo.id}>
+          {todo.content}
         </li>)}
       </ul>
       <div>
